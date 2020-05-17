@@ -36,4 +36,18 @@ describe "Merchants API" do
     expect(response).to be_successful
     expect(merchant["data"]["attributes"]["name"]).to eq(body[:name])
   end
+
+  it "can update an existing merchant" do
+    id = create(:merchant).id
+    previous_name = Merchant.last.name
+    body_params = { "name": "Sledge" }
+
+    put "/api/v1/merchants/#{id}", params: body_params
+
+    merchant = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(merchant["data"]["attributes"]["name"]).not_to eq(previous_name)
+    expect(merchant["data"]["attributes"]["name"]).to eq("Sledge")
+  end
 end
