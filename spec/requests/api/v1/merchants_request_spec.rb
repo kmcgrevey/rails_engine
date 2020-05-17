@@ -25,4 +25,15 @@ describe "Merchants API" do
    
     expect(merchant["data"]["id"]).to eq(id.to_s)
   end
+
+  it "can create a new merchant" do
+    body = { "name": "McDuffy's" }
+
+    expect{ post '/api/v1/merchants', params: body }.to change(Merchant, :count).by(1)
+    
+    merchant = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(merchant["data"]["attributes"]["name"]).to eq(body[:name])
+  end
 end
