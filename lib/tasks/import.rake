@@ -8,6 +8,10 @@ task :import => [:environment] do
   InvoiceItem.destroy_all
   Transaction.destroy_all
 
+  ActiveRecord::Base.connection.tables.each do |t|
+    ActiveRecord::Base.connection.reset_pk_sequence!(t)
+  end
+  
   CSV.foreach('./data/merchants.csv', headers: :true).each do |row|
     Merchant.create( name: row['name'],
                       created_at: row['created_at'],
@@ -56,7 +60,4 @@ task :import => [:environment] do
                   updated_at: row['updated_at'] )
   end
 
-  ActiveRecord::Base.connection.tables.each do |t|
-    ActiveRecord::Base.connection.reset_pk_sequence!(t)
-  end
 end
