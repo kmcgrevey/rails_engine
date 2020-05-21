@@ -52,7 +52,7 @@ describe "Items API" do
     previous_name = Item.last.name
     previous_price = Item.last.unit_price
     body_params = { "name": "Sledge",
-                    "unit_price": 33.33 }
+                    "unit_price": "33.33" }
 
     put "/api/v1/items/#{item1.id}", params: body_params
 
@@ -62,7 +62,7 @@ describe "Items API" do
     expect(item["data"]["attributes"]["name"]).not_to eq(previous_name)
     expect(item["data"]["attributes"]["name"]).to eq("Sledge")
     expect(item["data"]["attributes"]["unit_price"]).not_to eq(previous_price)
-    expect(item["data"]["attributes"]["unit_price"]).to eq("33.33")
+    expect(item["data"]["attributes"]["unit_price"]).to eq(33.33)
   end
 
   it "can destroy an item" do
