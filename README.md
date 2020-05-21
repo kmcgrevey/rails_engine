@@ -1,24 +1,14 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails ENGINE is the API backend for Rails DRIVER.  I am using the default Rails DRIVER for spec harness testing from Turing.
 
-Things you may want to cover:
+To start your local copy:
 
-* Ruby version
+* `bundle exec rake import` --> seed database
 
-* System dependencies
+* Rails Engine --> `rails s` (to start server)
 
-* Configuration
+* Rails Driver -- 'rails s -p 3001` (to start server)
 
-* Database creation
+* New browser window --> `localhost:3001` (to use app)
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
