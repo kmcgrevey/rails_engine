@@ -10,7 +10,7 @@ describe "Search for single Merchant" do
     expect(response).to be_successful
 
     resp = JSON.parse(response.body)
-  
+
     expect(resp['data']['attributes']['name']).to eq(merchant1.name)
   end
 end
