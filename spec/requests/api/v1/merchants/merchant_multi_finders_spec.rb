@@ -13,9 +13,7 @@ describe "Search for mulitple Merchants" do
 
     resp = JSON.parse(response.body)
 
-    # expect(resp['data']['attributes']['name']).to eq(merchant1.name)
     expect(resp['data'].count).to eq(3)
     expect(resp['data'].class).to eq(Array)
-    # binding.pry
   end
 end
