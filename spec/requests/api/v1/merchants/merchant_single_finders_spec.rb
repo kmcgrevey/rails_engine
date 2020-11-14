@@ -2,12 +2,15 @@ require 'rails_helper'
 
 describe "Search for single Merchant" do
   before(:each) do
-    @merchant1 = Merchant.create(name: "Boogers",
-                                 created_at: "2012-03-27 14:53:59",
-                                 updated_at: "2012-03-27 14:53:59")
-    @merchant2 = Merchant.create(name: "Bobbers",
-                                created_at: "2019-11-11 02:55:30",
-                                updated_at: "2020-02-20 12:30:00")
+    @date1 = Time.new(2012, 03, 27, 14, 53, 59, "+00:00")
+    @date2 = Time.new(2019, 11, 11, 02, 55, 30, "+00:00") # "2019-11-11 02:55:30"
+    @date3 = Time.new(2020, 02, 20, 12, 30, 00, "+00:00")
+    @merchant1 = Merchant.create!(name: "Boogers",
+                                 created_at: @date1,
+                                 updated_at: @date1)
+    @merchant2 = Merchant.create!(name: "Bobbers",
+                                created_at: @date2,
+                                updated_at: @date3)
   end
   
   it "locates by partial string of an attribute" do
@@ -24,13 +27,13 @@ describe "Search for single Merchant" do
     get '/api/v1/merchants/find?created_at=2012-03-27'
 
     resp = JSON.parse(response.body)
-
-    expect(resp['data']['attributes']['created_at']).to eq(@merchant1.created_at)
+    
+    expect(resp['data']['attributes']['id']).to eq(@merchant1.id)
 
     get '/api/v1/merchants/find?updated_at=2020-02-20'
 
     resp = JSON.parse(response.body)
-    
-    expect(resp['data']['attributes']['updated_at']).to eq(@merchant2.updated_at)
+  
+    expect(resp['data']['attributes']['id']).to eq(@merchant2.id)
   end
 end
