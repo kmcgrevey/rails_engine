@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe 'Search for multiple Items', type: :request do
   before(:each) do
     merchant = create(:merchant)
-    # create_list(:item, 3, merchant_id: merchant.id)
     @item1 = create(:item,
                     merchant_id: merchant.id,
                     name: "Inkpenny",
