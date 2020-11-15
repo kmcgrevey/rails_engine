@@ -5,6 +5,12 @@ class Api::V1::Items::ItemFinderController < ApplicationController
     render json: ItemSerializer.new(item)
   end
 
+  def index
+    # binding.pry
+    item = Item.where("LOWER(#{item_params.keys[0]}) like ?", "%#{item_params.values[0].downcase}%")
+    render json: ItemSerializer.new(item)
+  end
+
   private
 
   def item_params

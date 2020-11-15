@@ -23,13 +23,18 @@ RSpec.describe 'Search for multiple Items', type: :request do
   end
 
   it 'returns a list by partial string search' do
-    get '/api/v1/items/find_by?name=pen'
+    get '/api/v1/items/find_all?name=pen'
 
     expect(response).to be_successful
 
     resp = JSON.parse(response.body)
+    
+    list = resp['data'].map do |item|
+      item['attributes']['name']
+    end
 
-    expect(resp['data'].length).to eq(3)
-    expect(resp['data']).to_not include(@item4)
+    expect(list.length).to eq(3)
+    expect(list).to include(@item1.name)
+    expect(list).to_not include(@item4.name)
   end
 end
