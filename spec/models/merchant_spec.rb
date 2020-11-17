@@ -20,7 +20,13 @@ RSpec.describe Merchant, type: :model do
     it '.revenue' do
       inv_item = InvoiceItem.first
       merchant = inv_item.invoice.merchant
-      rev = Merchant.revenue(merchant.id)
+      rev = Merchant.revenue(merchant.id)[0].merch_rev
+      
+      expect(rev).to eq(inv_item.quantity * inv_item.unit_price)
+
+      inv_item = InvoiceItem.last
+      merchant = inv_item.invoice.merchant
+      rev = Merchant.revenue(merchant.id)[0].merch_rev
 
       expect(rev).to eq(inv_item.quantity * inv_item.unit_price)
     end
