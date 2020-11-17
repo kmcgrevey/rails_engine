@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       namespace :merchants do
         get '/find', to: 'merchant_finder#show'
         get '/find_all', to: 'merchant_finder#index'
+        get '/:id/revenue', to: 'revenue#show'
       end
 
       namespace :items do
