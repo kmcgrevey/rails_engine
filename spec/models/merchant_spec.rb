@@ -30,5 +30,16 @@ RSpec.describe Merchant, type: :model do
 
       expect(rev).to eq(inv_item.quantity * inv_item.unit_price)
     end
+
+    it '.most_revenue' do
+      top_one = Merchant.most_revenue(1)
+      top_two = Merchant.most_revenue(2)
+      
+      expect(top_one[1]).to eq(nil)
+      expect(top_two[2]).to eq(nil)
+      expect(top_two[0]).to eq(top_one[0])
+      expect(Merchant.revenue(top_two[0].id)[0].merch_rev)
+        .to be > (Merchant.revenue(top_two[1].id)[0].merch_rev)
+    end
   end
 end
