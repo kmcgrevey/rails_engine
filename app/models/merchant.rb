@@ -16,7 +16,7 @@ class Merchant < ApplicationRecord
     select('merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS most_rev')
     .joins(:invoice_items, :transactions)
     .merge(Transaction.successful)
-    .group('merchants.id')
+    .group('id')
     .order('most_rev desc')
     .limit(quantity)
   end

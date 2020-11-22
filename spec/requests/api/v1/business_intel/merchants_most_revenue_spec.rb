@@ -15,6 +15,6 @@ RSpec.describe 'BI Endpoint', type: :request do
     
     resp = JSON.parse(response.body)
     
-    expect(resp.count).to eq(3)
+    expect(resp['data'].count).to eq(3)
   end
 end
